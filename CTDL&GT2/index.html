@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cây tìm kiếm nhị phân(BST)</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="header" class="margin-5 text-25-white text-center">Ở đây chưa có gì</div>
+    <div id="content" class="margin-lr-5">
+        <ul id="content-menu">
+              <li class="start">Danh mục</li>
+              <li><a href="">Chưa có gì</a></li>
+              <li><a href="">Chưa có gì</a></li>
+              <li><a href="">Chưa có gì</a></li>
+              <li><a href="">Chưa có gì</a></li>
+              <li class="margin-bottom-4"><a href="">Chưa có gì</a></li>
+        </ul>
+        <div id="content-contentpage">
+            <h1>Cây tìm kiếm nhị phân(BST)</h1>
+            <div class="summary">
+                NỘI DUNG BÀI VIẾT 
+                <ul id="list">
+                     <li>Cây BST là gì? Ứng dụng của cây BST</li>
+                     <li>Cách hoạt động của cây BST</li>
+                     <li>Cài đặt cây BST-
+                        <ul>
+                            <li> <a class="color-black" href="#add" >Thêm một phần tử</a></li>
+                            <li> <a class="color-black" href="#delete" >Xóa một phần tử</a></li>
+                            <li> <a class="color-black" href="#search" >Tìm kiếm một phần tử</a></li>
+                            <li> <a class="color-black" href="#duyet" >Duyệt cây</a></li>
+                        </ul>
+                     </li>
+                </ul>
+            </div>
+            <div class="nd">
+                <ul>
+                    <li><h4>Cây BST là gì? Ứng dụng của cây BST</h4>
+                        <p>
+                            Cây tìm kiếm nhị phân(TA: Binary Search Tree – viết tắt: BST) – là một cây nhị phân và có thêm các ràng buộc sau đây:
+                            <ul>
+                                <li>Giá trị của tất cả các Node ở cây con bên trái phải <= giá trị của Node gốc.</li>
+                                <li>Giá trị của tất cả các Node ở cây con bên phải phải > giá trị của Node gốc.</li>
+                                <li>Tất cả các cây con(bao gồm bên trái và phải) cũng đều phải đảm bảo 2 tính chất trên.</li>
+                            </ul>
+                            <img src="./img/bst/dieu-kien-cay-tim-kiem-nhi-phan.jpg">
+                            Cây tìm kiếm nhị phân là một cấu trúc dữ liệu hiệu quả cho phép chúng ta xây dựng nên một danh sách mà dữ liệu trên đó được sắp xếp:
+                            <ul>
+                                <li>Nó được gọi là cây nhị phân vì mỗi Node của cây chỉ có tối đa hai con</li>
+                                <li>Nó được gọi là cây tìm kiếm nhị phân vì nó có thể được sử dụng để tìm kiếm sự hiện diện của một phần tử trong thời gian O(log (n)).</li>
+                            </ul>
+                            <p>
+                            <h4>Ứng dụng của cây BST</h4>
+                            <ul>
+                                  <li><a href="https://en.wikipedia.org/wiki/Binary_search_tree">Cây tìm kiếm nhị phân</a> - Được sử dụng trong nhiều ứng dụng tìm kiếm trong đó dữ liệu liên tục vào / ra, chẳng hạn như <snap>map</snap> và <snap>set</snap> các đối tượng trong thư viện của nhiều ngôn ngữ.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/Binary_space_partitioning">Phân vùng không gian nhị phân</a> - Được sử dụng trong hầu hết mọi trò chơi video 3D để xác định đối tượng nào cần được hiển thị.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/Radix_tree">Binary Tries</a> - Được sử dụng trong hầu hết các bộ định tuyến băng thông cao để lưu trữ các bảng bộ định tuyến.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/Hash_tree">Cây băm</a> - được sử dụng trong các chương trình p2p và chữ ký hình ảnh chuyên dụng trong đó hàm băm cần được xác minh, nhưng toàn bộ tệp không có sẵn.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/Heap_(data_structure)">Heaps</a> - Được sử dụng để thực hiện các hàng đợi ưu tiên hiệu quả, lần lượt được sử dụng để lập lịch cho các quy trình trong nhiều hệ điều hành, Chất lượng dịch vụ trong bộ định tuyến và A * (thuật toán tìm đường được sử dụng trong các ứng dụng AI, bao gồm robot và trò chơi video) . Cũng được sử dụng trong heap-sort.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/Huffman_coding">Cây mã hóa Huffman ( Chip Uni )</a> - được sử dụng trong các thuật toán nén, chẳng hạn như các thuật toán được sử dụng bởi các định dạng tệp .jpeg và .mp3.</li>
+                                  <li><a href="https://www.wisdom.weizmann.ac.il/~/oded/ggm.html">Cây GGM</a> - Được sử dụng trong các ứng dụng mã hóa để tạo ra một cây số giả ngẫu nhiên.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Cây cú pháp</a> - Được xây dựng bởi trình biên dịch và (ngầm) máy tính để phân tích các biểu thức.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/Treap">Treap</a> - Cấu trúc dữ liệu ngẫu nhiên được sử dụng trong phân bổ bộ nhớ và mạng không dây.</li>
+                                  <li><a href="https://en.wikipedia.org/wiki/T-tree">Cây T</a> - Mặc dù hầu hết các cơ sở dữ liệu sử dụng một số dạng cây B để lưu trữ dữ liệu trên ổ đĩa, nhưng các cơ sở dữ liệu lưu giữ tất cả (hầu hết) dữ liệu của chúng trong bộ nhớ thường sử dụng cây T để làm như vậy.</li>
+                            </ul>
+                            </p>
+                        </p>
+                    </li>
+                    <li>Cách hoạt động của cây BST</li>
+                    <li>
+                        Cài đặt cây BST
+                        <div class="setting">
+                            Hãy định nghĩa một đối tượng Node cho cây của chúng ta:
+                            <div class="console">
+                                <span class="class weight700">class</span> <span>Node</span> 
+                                <div>
+                                { <br>
+                                    <span class='stt1' ><span class="int weight700">int</span> value;</span><br>
+                                    <span class='stt1' >Node left;</span><br>
+                                    <span class='stt1' >Node right;</span><br>
+                                
+                                    <span class='stt1' >Node(<span class="int weight700">int</span> value)</span> {<br>
+                                    <span ><span class="this weight700">this</span>.value = value;</span><br>
+                                    <span >right = <span class="null weight700">null</span>;</span><br>
+                                    <span >left = <span class="null weight700">null</span>;</span><br>
+                                    <span class='stt1' >}</span><br>
+                                }
+                                </div>
+                            </div>
+                            Sau đó, chúng ta sẽ thêm nút bắt đầu của cây, thường được gọi là gốc:
+                            <div class="console">
+                                <span class="class weight700">public class</span> BinaryTree 
+                                <div>{<br>
+
+                                    <span class="stt1">Node root;</span>
+                                    <br><br>
+                                    <span class="stt1">// ...</span><br>
+                                }</div>
+                            </div>
+                            <ul class="weight700">
+                                <li id="add" class="weight700 style-inside">Thêm một phần tử
+                                    <div class="console weight500">
+                                        <span class="class weight700">private</span> Node addRecursive(Node current, <span class="int weight700">int</span> value)
+                                        <div>{ <br>
+                                            <span class="stt1"> <span class="class weight700">if</span> (current == null) {</span><br>
+                                            <span><span class="int weight700">return new</span> Node(value);</span>
+                                            <span class="stt1"> <br><span id="stt1">}</span></span><br>
+                                            <span class="stt1"> <span class="class weight700">if</span> (value < current.value) {</span><br>
+                                            <span>current.left = addRecursive(current.left, value);</span><br>
+                                            <span class="stt1"> } <span class="class weight700">else if</span>(value > current.value) {</span><br>
+                                            <span>current.right = addRecursive(current.right, value);</span><br>
+                                            <span class="stt1"> } <span class="class weight700">else</span> {</span><br>
+                                            <span>// value already exists<br></span>
+                                            <span><span class="int weight700">return</span> current;<br></span>
+                                            <span class="stt1"> }  </span>  <br>
+                                        
+                                            <span class="stt1"> <span class="int weight700">return</span> current;</span><br>
+                                        }
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li class="style-circle">
+                                            Kiểm tra Node được truyền vào có null hay không, nếu Node là null thì kết thúc hàm và trả về Node mới khởi tạo có giá trị truyền vào là 'value'. 
+                                        </li>
+                                        <li class="style-circle">
+                                            Nếu Node truyền vào khác null, nó sẽ tiếp tục so sánh 'value' và 'current.value'. Nếu lớn hơn sẽ kiểm tra Node bên phải của Node và ngược lại bằng cách truyền vào hàm ban đầu Node đó.  
+                                        </li>
+                                        <li class="style-circle">
+                                            Nếu 2 giá trị bằng nhau, cây đã tồn tại giá trị cần thêm. Kết thúc hàm và trả về Node được truyền vào.
+                                        </li>
+                                        <li class="style-circle">
+                                            Cứ thể theo 1 vòng lặp đệ qui, và khi nào nó không chạy được vào câu lệnh điều kiện nào nữa thì khi đó giá trị cần thêm đã được thêm thành công. Kết thúc hàm và trả về Node hiện tại.
+                                        </li>
+                                    </ul>
+                                    <span class="backwhite weight700" id="add-insert">Hãy xem hình ảnh mô phỏng việc thêm giá trị 4 vào BST dưới đây</span>
+                                    <div class="display-flex">
+                                        <img class="width50" src="./img/bst/them-node-vao-cay-tim-kiem-nhi-phan-470x1024 (2).jpg">
+                                        <img class="width50" src="./img/bst/them-node-vao-cay-tim-kiem-nhi-phan-470x1024 (3).jpg">
+                                    </div>
+                                </li>
+                                <li id="search" class="weight700 style-inside">Tìm kiếm một phần tử
+                                    <div class="console weight500">
+                                            <span class="weight700 int">private boolean</span>  containsNodeRecursive(Node current, <span class="int weight700">int</span> value) {     <br>
+                                            <diV><span class="stt1"> <span class="class weight700">if</span>(current == null) {    </span>                   <br>
+                                            <span >   return false;       </span>                      <br>
+                                            <span class="stt1">}                        </span>                 <br>
+                                            <span class="stt1"> <span class="class weight700">if</span>(value == current.value) {    </span>             <br>
+                                            <span >   <span class="class weight700">return</span> true;               </span>                <br>
+                                            <span class="stt1">}                              </span>               <br>
+                                            <span class="stt1"><span class="class weight700">return</span> value < current.value          </span>          <br>
+                                            <span > ? containsNodeRecursive(current.left, value)  </span>   <br>
+                                            <span > : containsNodeRecursive(current.right, value);      </span> <br>
+                                        }
+                                            </div>
+                                    </div>
+                                </li>
+                                <div class="backwhite">
+                                    Cách hoạt động của hàm tìm kiếm tương tự thêm phần tử, <a href="#add-insert">Ấn vào đây để xem</a>
+                                </div>
+                                <li id="delete" class="weight700 style-inside">Xóa một phần tử
+                                       <div class="console khac">
+                                        <span class="left00"> <span class="color-green weight700">private</span> Node deleteRecursive(Node current, <span class="color-green weight700">int</span> value) </span> <br>
+                                        <span class="left00"> {</span>
+                                        <br>
+                                        <br>
+                                        <span class="left20">     <span class="color-green weight700">if</span> (current == <span class="color-green weight700">null</span>) </span>
+                                        <br>
+                                        <span class="left20">         {</span>
+                                        <br>
+                                        <span class="left40">         <span class="color-green weight700">return</span> <span class="color-green weight700">null</span>;</span>
+                                        <br>
+                                        <span class="left20">         }</span>
+                                        <br>
+                                        <span class="left20"> </span>
+                                        <br>
+                                        <span class="left20">     <span class="color-green weight700">if</span> (value == current.value) </span>
+                                        <br>
+                                        <span class="left20">     {</span>
+                                        <br>
+                                        <span class="left40">         <span class="color-green weight700">if</span> (current.left == <span class="color-green weight700">null</span> && current.right == <span class="color-green weight700">null</span>) </span>
+                                        <br>
+                                        <span class="left40">         {</span>
+                                        <br>
+                                        <span class="left60">         <span class="color-green weight700">return</span> <span class="color-green weight700">null</span>;</span>
+                                        <br>
+                                        <span class="left40">         }</span>
+                                        <br>
+                                        <span class="left40">         <span class="color-green weight700">if</span> (current.right == <span class="color-green weight700">null</span>) </span>
+                                        <br>
+                                        <span class="left40">         {</span>
+                                        <br>
+                                        <span class="left60">          <span class="color-green weight700">return</span> current.left;</span>
+                                        <br>
+                                        <span class="left40">         }</span>
+                                        <br>
+                                        <span class="left40">         <span class="color-green weight700">if</span> (current.left == <span class="color-green weight700">null</span>) </span>
+                                        <br>
+                                        <span class="left40">         {</span>
+                                        <br>
+                                        <span class="left60">          <span class="color-green weight700">return</span> current.right;</span>
+                                        <br>
+                                        <span class="left40">         } </span>
+                                        <br>
+                                        <span class="left40">         <span class="color-green weight700">int</span> smallestValue = findSmallestValue(current.right);</span>
+                                        <br>
+                                        <span class="left40">         current.value = smallestValue;</span>
+                                        <br>
+                                        <span class="left40">         current.right = deleteRecursive(current.right, smallestValue);</span>
+                                        <br>
+                                        <span class="left40">         <span class="color-green weight700">return</span> current;</span>
+                                        <br>
+                                        <span class="left20">     } </span>
+                                        <br>
+                                        <span class="left20">     <span class="color-green weight700">if</span> (value < current.value) </span>
+                                        <br>
+                                        <span class="left20">     {</span>
+                                        <br>
+                                        <span class="left40">         current.left = deleteRecursive(current.left, value);</span>
+                                        <br>
+                                        <span class="left40">         <span class="color-green weight700">return</span> current;</span>
+                                        <br>
+                                        <span class="left20">     }</span>
+                                        <br>
+                                        <span class="left20">     current.right = deleteRecursive(current.right, value);</span>
+                                        <br>
+                                        <span class="left20">     <span class="color-green weight700">return</span> current;</span>
+                                        <br>
+                                        <span class="left00"> }</span>
+                                        <br>
+                                        <span class="left00"> </span>
+                                        <br>
+                                        <span class="left00"> <span class="color-green weight700">private</span> <span class="color-green weight700">int</span> findSmallestValue(Node root) </span>
+                                        <br>
+                                        <span class="left00"> {</span>
+                                        <br>
+                                        <span class="left20">     <span class="color-green weight700">return</span> root.left == <span class="color-green weight700">null</span> ? root.value : findSmallestValue(root.left);</span>
+                                        <br>
+                                        <span class="left00"> }</span>                               
+                                       </div>
+                                       <ul>
+                                         <li>TH1: Node cần xóa là Node lá</li>
+                                         <div class="console khac">
+                                            <span class="left00">         <span class="color-green weight700">if</span> (current.left == <span class="color-green weight700">null</span> && current.right == <span class="color-green weight700">null</span>) </span>
+                                            <br>
+                                            <span class="left00">         {</span>
+                                            <br>
+                                            <span class="left20">         <span class="color-green weight700">return</span> <span class="color-green weight700">null</span>;</span>
+                                            <br>
+                                            <span class="left00">         }</span>
+                                            <br>
+                                         </div>
+                                         <img src="./img/bst/delete1.png">
+                                         <li>TH2: Node cần xóa có Node con là Node bên phải hoặc bên trái</li>
+                                         <div class="console khac">
+                                            <span class="left00">         <span class="color-green weight700">if</span> (current.right == <span class="color-green weight700">null</span>) </span>
+                                            <br>
+                                            <span class="left00">         {</span>
+                                            <br>
+                                            <span class="left20">          <span class="color-green weight700">return</span> current.left;</span>
+                                            <br>
+                                            <span class="left00">         }</span>
+                                            <br>
+                                            <span class="left00">         <span class="color-green weight700">if</span> (current.left == <span class="color-green weight700">null</span>) </span>
+                                            <br>
+                                            <span class="left00">         {</span>
+                                            <br>
+                                            <span class="left20">          <span class="color-green weight700">return</span> current.right;</span>
+                                            <br>
+                                            <span class="left00">         } </span>
+                                         </div>
+                                         <img src="./img/bst/delete2.png">
+                                         <li>TH3: Node cần xóa có cả 2 Node trái và phải</li>
+                                         <div class="backwhite">
+                                            Đây là trường hợp nan giải nhất, nhưng chúng ta vẫn có cách làm như sau:<br>
+                                            + Tìm Node của con trái nhất(giả sử nó là leftmost) của cây con bên phải của Node cần xóa.<br>
+                                            + Cập nhật giá trị của Node cần xóa = giá trị của Node leftmost.<br>
+                                            + Gọi đệ quy hàm Delete xóa Node leftmost khỏi BST.<br>
+                                            <b class="backwhite">Giải thích:</b><br>
+                                            - Khi muốn xóa Node có 2 con, ta cần tìm Node nào đó trong BST thỏa mãn tính chất lớn hơn lớn hơn tất cả các con bên trái và nhỏ hơn tất cả các con bên phái -> Node đó chính là LeftMostChild của con bên phải của Node cần xóa.<br>
+                                            - Ta chỉ cần sửa giá trị của Node cần xóa, không cần xóa Node đó làm gì. Thay vào đó, xóa Node bị thế thân(LeftMostChild của con bên phải của Node cần xóa).<br>
+                                        </div>
+                                         <div class="console khac">
+                                            <span class="left00">         <span class="color-green weight700">int</span> smallestValue = findSmallestValue(current.right);</span>
+                                            <br>
+                                            <span class="left00">         current.value = smallestValue;</span>
+                                            <br>
+                                            <span class="left00">         current.right = deleteRecursive(current.right, smallestValue);</span>
+                                            <br>
+                                            <span class="left00">         <span class="color-green weight700">return</span> current;</span>
+                                         </div>
+                                         <img class="wd400" src="./img/bst/delete3.png">
+                                       </ul>
+                                </li>
+                             
+                                <li id="duyet" class="weight700 style-inside">Duyệt cây
+                                    <ul>
+                                        <li>Cách 1</li>
+                                        <div class="console khac">
+                                            <span class="left00"> <span class="color-green weight700">void</span> InOrder(Node root)</span>
+                                            <br>
+                                            <span class="left00"> {</span>
+                                            <br>
+                                            <span class="left20">     <span class="color-green weight700">if</span>(root != <span class="color-green weight700">null</span>)</span>
+                                            <br>
+                                            <span class="left20">     {</span>
+                                            <br>
+                                            <span class="left40">         <span class="color-green weight700">System</span>.<span class="color-green weight700">out</span>.<span class="color-green weight700">print</span>(root.data + " ");</span>
+                                            <br>
+                                            <span class="left40">         InOrder(root.left);</span>
+                                            <br>
+                                            <span class="left40">         InOrder(root.right);</span>
+                                            <br>
+                                            <span class="left20">     }</span>
+                                            <br>
+                                            <span class="left00"> }</span>
+
+                                            
+                                        </div>
+                                        <img src="./img/bst/pre_order_traveral.jpg">
+                                        <li>Cách 2</li>
+                                        <div class="console khac">
+                                            <span class="left00"> <span class="color-green weight700">void</span> InOrder(Node root)</span>
+                                            <br>
+                                            <span class="left00"> {</span>
+                                            <br>
+                                            <span class="left20">     <span class="color-green weight700">if</span>(root != <span class="color-green weight700">null</span>)</span>
+                                            <br>
+                                            <span class="left20">     {</span>
+                                            <br>
+                                            <span class="left40">         InOrder(root.left);</span>
+                                            <br>
+                                            <span class="left40">         <span class="color-green weight700">System</span>.<span class="color-green weight700">out</span>.<span class="color-green weight700">print</span>(root.data + " ");</span>
+                                            <br>
+                                            <span class="left40">         InOrder(root.right);</span>
+                                            <br>
+                                            <span class="left20">     }</span>
+                                            <br>
+                                            <span class="left00"> }</span>
+
+                                        </div>
+                                        <img src="./img/bst/2.jpg">
+                                        <li>Cách 3</li>
+                                        <div class="console khac">
+                                            <span class="left00"> <span class="color-green weight700">void</span> InOrder(Node root)</span>
+                                            <br>
+                                            <span class="left00"> {</span>
+                                            <br>
+                                            <span class="left20">     <span class="color-green weight700">if</span>(root != <span class="color-green weight700">null</span>)</span>
+                                            <br>
+                                            <span class="left20">     {</span>
+                                            <br>
+                                            <span class="left40">         InOrder(root.left);</span>
+                                            <br>
+                                            <span class="left40">         InOrder(root.right);</span>
+                                            <br>
+                                            <span class="left40">         <span class="color-green weight700">System</span>.<span class="color-green weight700">out</span>.<span class="color-green weight700">print</span>(root.data + " ");</span>
+                                            <br>
+                                            <span class="left20">     }</span>
+                                            <br>
+                                            <span class="left00"> }</span>
+                                            
+                                        </div>
+                                        <img src="./img/bst/3.jpg">
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Kết luận
+                    </li>
+                    <p class="weight500">Không biết kết luận thế nào</p>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
